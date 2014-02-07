@@ -7,8 +7,13 @@
     </head>
     <body>
         <script type="text/javascript">
-            // Your beautiful D3 code will go here
-	    d3.select("body").append("p").text("New paragraph!");
+	  var dataset = [1,2,3,4,5];
+
+	  d3.select("body").selectAll("p")
+	    .data(dataset)
+	    .enter()
+	    .append("p")
+	    .text(function(x) {return ("The data is: " + x);});
         </script>
     </body>
 </html>
