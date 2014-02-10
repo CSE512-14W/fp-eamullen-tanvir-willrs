@@ -12,6 +12,8 @@ In this project, we focused on appliance level energy consupmtion of household i
 
 ## Running Instructions
 
+To run our code, download the repository, and run a simple python http server. Run "python -m SimpleHTTPServer" in the root project directory, and access at "http://localhost:8000".
+
 ## Story Board
 
 Link: https://github.com/CSE512-14W/a3-eamullen-tanvir/blob/master/storyboard.pdf
@@ -21,6 +23,8 @@ Link: https://github.com/CSE512-14W/a3-eamullen-tanvir/blob/master/storyboard.pd
 Due to time constraint and data shortage, we could not get to the point of dynamic timeline simulation. Right now the visualization shows the total power consumption over the entire time and a prediction of yearly cost for the appliance. Also there is no option to sort the appliances over energy usage. But we are planning to extend this to our final project and hope to accomplish all these with a lot of additional features.
 
 ## Development Process
+
+
 
 
 
