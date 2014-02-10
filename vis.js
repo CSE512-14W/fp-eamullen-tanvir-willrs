@@ -10,18 +10,19 @@ var h4 = d3.map()
 
 //callback function that runs when all data is loaded
 function ready() {
-    var current = h1;
+    var current = h3;
 
     //grab the body tag from the DOM, select all paragraphs
     d3.select("body").selectAll("p")
     //set data as keys from h1 (house 1 data)
-	.data(current.keys())
+    //sort by time it came on (earliest first)
+	.data(current.keys().sort(function(a,b) {return a.time_on - b.time_on}))
 	.enter()
 	.append("p")
 	.text(function(x) {
 	    var a = current.get(x)
 	    return ("Appliance: " + a.name + " was on for: "
-				   + ((a.time_off - a.time_on)/60.0) + " minutes.") })
+				   + ((a.time_off - a.time_on)/60.0) + " minutes at time " + a.time_on) })
 }
 
 var i = 0;
