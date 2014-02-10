@@ -51,6 +51,10 @@ var h4 = d3.map()
 //callback function that runs when all data is loaded
 function ready() {
 
+    var start = 2351116420
+    var end = 0
+
+
     //create a time that is within data window
     var seconds = new Date().getTime()/1000;
     seconds = seconds % 90000;
@@ -58,15 +62,32 @@ function ready() {
 
     //switch houses by switching this variable
     var current = h1;
+
+    //power usage, in kWh, per appliance
     var app = d3.map();
 
     //return power use in kwh
     var power = function(a) {
-	var time = a.time_off - a.time_on;
+	var time = (a.time_off - a.time_on);
 	var wattsec = time * a.watts;
 	var kwattsec = wattsec/1000.0;
 	var kwh = kwattsec/3600.0;
+	
+	if (a.time_on < start) {
+	    start = a.time_on
+	}
+	if (a.time_off > end) {
+	    end = a.time_off
+	}
+	
 	return kwh;
+    }
+
+    //return cost of some number of kWh
+    var cost = function(a) {
+	//cost of energy in seattle is 7.93 cents per kWh
+	//see http://www.seattle.gov/light/conserve/resident/cv5_faq.htm#Answer5
+	return a * .0793;
     }
 
     for (var x in current.keys()) {
@@ -92,7 +113,20 @@ function ready() {
 	.append("img")
 	.attr("src",function(d) {return "appliances_pics/"+pic_map[d]+".png"})
 	.attr("width",150)
-	.on("mouseover",function(d) { d3.select(this).attr("title",app.get(d) + " kWh")})
+	.on("mouseover",function(d) { 
+	    d3.select(this)
+		.attr("title",
+		      app.get(d).toFixed(3) + " kWh\n$" 
+		      + cost(app.get(d)).toFixed(2) + "\n$" +
+		      (180*(cost(app.get(d)))).toFixed(2) + " per year"
+		     )
+		.attr("width",160)
+	})
+	.on("mouseout",function(d) { 
+	    d3.select(this)
+		.attr("title","")
+		.attr("width",150)
+	})
 	// .append("svg")
 	// .style("width",150)
 	// .style("height",150)
