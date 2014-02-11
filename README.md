@@ -24,7 +24,22 @@ Due to time constraint and data shortage, we could not get to the point of dynam
 
 ## Development Process
 
+Tanvir:
+ * Came up with idea
+ * Storyboarded
+ * Described vision
+ * Provided data
+ * Gathered images
+ * Wrote up project description
 
+Eric:
+ * Drafted app
+ * Polished app
+ * Investigated data
+
+As this was our first time using any web technologies whatsoever, we spent quite a while trying to wrap our heads around what the DOM was, what CSS was, how to write code in javascript, how to debug a web application, and even just what these HTML tags were all about. We spent a long time on many different tutorials online, and many hours frustrated at javascript.
+
+In terms of the process once the project got off the ground, there was a lot of almost copy pasting from one tutorial or another. Mostly the entire process was "What feature do we want? We want X. Google for how to make X in d3. Look at examples". This served us reasonably well, and I think we have a decent idea of how d3 works now. The hardest part was maintaining the mapping between our data and the DOM, which was straightforward if we did it right, and completely baffling when we messed it up. In the end we got it to work. It's still quite rough around the edges, but we hope to improve it for our final project.
 
 
 
