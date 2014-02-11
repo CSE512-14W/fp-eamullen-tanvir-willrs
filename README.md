@@ -12,7 +12,7 @@ In this project, we focused on appliance level energy consupmtion of household i
 
 ## Running Instructions
 
-To run our code, download the repository, and run a simple python http server. Run "python -m SimpleHTTPServer" in the root project directory, and access at "http://localhost:8000".
+To run our code, download the repository, and run a simple python http server. Run `python -m SimpleHTTPServer` in the root project directory, and access at "http://localhost:8000".
 
 ## Story Board
 
