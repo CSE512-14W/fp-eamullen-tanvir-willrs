@@ -8,7 +8,7 @@ a3-eamullen-tanvir
 
 ## Home Energy Disaggregation
 
-In this project, we focused on appliance level energy consupmtion of household items. When we receive our electricity bill at the end of the month, we just see a single amount which is the total electricity consumption cost of a home over the course of the month. But recently, different techniques have been invented to figure out appliance level energy consumption. The goal of this project is to create a simple user-friendly visualization with these data. Just by looking at the visualization, users should be able to figure out the appliance which is causing her most amount of bill. Now she can either change the appliance and buy a more energy friendly one, or use it less frequently to save some money. This will help the users not only to save their money, but also to reduce their carbon footprint on the planet.
+In this project, we focused on appliance level energy consupmtion of household items. When we receive our electricity bill at the end of the month, we just see a single amount which is the total electricity consumption cost of a home over the course of the month. But recently, different techniques have been invented to figure out appliance level energy consumption. The goal of this project is to create a simple user-friendly visualization with these data. Just by looking at the visualization, users should be able to figure out the appliance which is causing the largest portion of the bill. Now the user can either change the appliance and buy a more energy friendly one, or use it less frequently to save some money. This will help the users not only to save their money, but also to reduce their carbon footprint on the planet.
 
 ## Running Instructions
 
