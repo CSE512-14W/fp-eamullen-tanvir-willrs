@@ -111,7 +111,7 @@ function ready() {
 	.data(data)
 	.enter()
 	.append("img")
-	.attr("src",function(d) {return "appliances_pics/"+pic_map[d]+".png"})
+	.attr("src",function(d) {return "static/pics/"+pic_map[d]+".png"})
 	.attr("width",150)
 	.on("mouseover",function(d) { 
 	    d3.select(this)
