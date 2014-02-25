@@ -1,10 +1,11 @@
-a3-eamullen-tanvir
+Energy Use Monitoring
 ===============
 
 ## Team members
 
 1. Eric Mullen (emullen@cs.washington.edu)
 2. Tanvir Aumi (tanvir@cs.washington.edu)
+3. Will Scott (wrs@cs.washington.edu)
 
 ## Home Energy Disaggregation
 
