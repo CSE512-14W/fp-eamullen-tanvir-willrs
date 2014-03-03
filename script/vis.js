@@ -1,8 +1,3 @@
-//change to something else when we deploy
-//for now run by opening a terminal and typing
-//"python -m SimpleHTTPServer" in the project directory
-var host = "http://localhost:8000/"
-
 //Mapping from appliances id to pictures
 var pic_map = {};
 pic_map[30] = "light_bulb";
@@ -158,23 +153,14 @@ function ready() {
 	// 			   + ((a.time_off - a.time_on)/60.0) + " minutes at time " + a.time_on) })
 }
 
-var i = 0;
+var getLabels = function(d) {
+  console.log(d);
+};
 
 //asynchronously load data files, and call ready when finished
-queue()
-    .defer(d3.csv, host + "data/H1_final.csv", function(d) { 
-	h1.set(i++, {id: +d.ID, name: d.Name, time_on: +d.time_on, time_off: +d.time_off, watts: +d.watts}); 
-    })
-    // .defer(d3.csv, host + "data/H2.csv", function(d) { 
-    // 	h2.set(++i, {num: i, id: +d.id, name: d.Name, time_on: +d.time_on, time_off: +d.time_off}); 
-    // })
-    // .defer(d3.csv, host + "data/H3.csv", function(d) { 
-    // 	h3.set(++i, {num: i, id: +d.id, name: d.Name, time_on: +d.time_on, time_off: +d.time_off}); 
-    // })
-    // .defer(d3.csv, host + "data/H4.csv", function(d) { 
-    // 	h4.set(++i, {num: i, id: +d.id, name: d.Name, time_on: +d.time_on, time_off: +d.time_off}); 
-    // })
-    .await(ready)
+d3.dsv(" ", "text/plain")("low_freq/house_1/labels.dat", function(r) {
+  return r['mains'];
+}, getLabels);
 
 
 
