@@ -33,30 +33,30 @@ class MainHandler(tornado.web.RequestHandler):
         self.render("index.html")
 
 class DataHandler(tornado.websocket.WebSocketHandler):
-    self.clients = dict()
+    self.data = Data()
 
     def allow_draft76(self):
         return True
 
-    def open(self, thing):
-        print "Open " + thing
-        self.thing = thing
-        if not thing in DataHandler.clients:
-          DataHandler.clients[thing] = []
-        DataHandler.clients[thing].append(self)
+    def open(self):
+        print "Open"
+        self.watching = []
 
-        self.write_message({});
+        self.write_message({thing: 0, data: 'connected'});
 
     def on_finish(self):
         self.on_close()
 
     def on_close(self):
-        if hasattr(self, 'thing'):
-            DataHandler.clients[self.thing].remove(self)
+        for item in self.watching:
+            DataHandler.data.clean(item)
 
     # On incoming message
     def on_message(self, msg):
-        pass
+        val = tornado.escape.json_decode(msg)
+        def onItem(thing, msg):
+            self.write_message({thing: thing, data: msg})
+        DataHandler.data.track(val['thing'], onItem)
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()

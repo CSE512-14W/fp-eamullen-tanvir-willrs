@@ -5,6 +5,7 @@ class Data():
   def __init__(self):
     self.sources = dict()
     self.watchers = dict()
+    self.run()
   
   def run(self):
     if not next in self:
