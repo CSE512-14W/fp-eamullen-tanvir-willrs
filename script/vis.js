@@ -179,4 +179,14 @@ window.addEventListener('load', function() {
     });
 
   graph.render();
+
+  var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+      graph: graph
+  } );
+
+  var xAxis = new Rickshaw.Graph.Axis.Time({
+      graph: graph
+  });
+
+  xAxis.render();
 });
