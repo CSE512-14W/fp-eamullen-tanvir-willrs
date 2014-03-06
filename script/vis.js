@@ -162,6 +162,21 @@ d3.dsv(" ", "text/plain")("low_freq/house_1/labels.dat", function(r) {
   return r['mains'];
 }, getLabels);
 
+window.addEventListener('load', function() {
+  var graph = new Rickshaw.Graph( {
+    element: document.getElementById("chart"), 
+    width: 600, 
+    height: 200, 
+    series: [{
+      color: 'steelblue',
+      data: [ 
+        { x: 0, y: 40 }, 
+        { x: 1, y: 49 }, 
+        { x: 2, y: 38 }, 
+        { x: 3, y: 30 }, 
+        { x: 4, y: 32 } ]
+      }]
+    });
 
-
-
+  graph.render();
+});
