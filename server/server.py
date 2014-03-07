@@ -29,7 +29,7 @@ class MainHandler(tornado.web.RequestHandler):
         self.render("index.html")
 
 class DataHandler(tornado.websocket.WebSocketHandler):
-    self.data = Data()
+    data = Data()
 
     def allow_draft76(self):
         return True

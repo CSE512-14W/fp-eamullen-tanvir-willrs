@@ -8,11 +8,11 @@ class Data():
     self.run()
   
   def run(self):
-    if not next in self:
+    if not hasattr(self, 'next'):
       self.next = time.time()
     self.emit()
     self.next += 1
-    threading.Timer(next - time.time(), self.run).start()
+    threading.Timer(self.next - time.time(), self.run).start()
 
   def emit(self):
     for thing in self.sources:
