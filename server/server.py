@@ -14,6 +14,7 @@ import tornado.web
 import tornado.websocket
 import uuid
 from tornado.options import define, options
+from data import Data
 
 default_port = 8080
 if 'PORT' in os.environ:
@@ -22,11 +23,6 @@ define("port", default=default_port, help="port", type=int)
 
 rootLogger = logging.getLogger('')
 rootLogger.setLevel(logging.ERROR)
-
-tornado.web.Application([
-    (r"/", MainHandler),
-    (r"/data/([a-zA-Z0-9_]*)", DataHandler)
-])
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -57,6 +53,11 @@ class DataHandler(tornado.websocket.WebSocketHandler):
         def onItem(thing, msg):
             self.write_message({thing: thing, data: msg})
         DataHandler.data.track(val['thing'], onItem)
+
+application = tornado.web.Application([
+    (r"/", MainHandler),
+    (r"/data/([a-zA-Z0-9_]*)", DataHandler)
+])
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
