@@ -34,24 +34,28 @@ class DataHandler(tornado.websocket.WebSocketHandler):
     def allow_draft76(self):
         return True
 
-    def open(self):
-        print "Open"
+    def open(self, thing):
+        print "asked for ", thing
         self.watching = []
 
-        self.write_message({thing: 0, data: 'connected'});
+        self.write_message({'thing': 0, 'data': 'connected'});
 
     def on_finish(self):
         self.on_close()
 
     def on_close(self):
-        for item in self.watching:
+        if hasattr(self, 'watching'):
+          for item in self.watching:
             DataHandler.data.clean(item)
 
     # On incoming message
     def on_message(self, msg):
         val = tornado.escape.json_decode(msg)
         def onItem(thing, msg):
-            self.write_message({thing: thing, data: msg})
+          try:
+            self.write_message({'thing': thing, 'data': msg})
+          except:
+            pass
         DataHandler.data.track(val['thing'], onItem)
 
 application = tornado.web.Application([

@@ -192,3 +192,15 @@ window.addEventListener('load', function() {
 });
 
 var conn = new WebSocket('ws://' + location.host + '/data/stream');
+conn.addEventListener('message', function(m) {
+  console.log(m);
+  onmsg();
+}, true);
+
+var tracking = 0;
+function onmsg() {
+  if (!tracking) {
+    conn.send('{"thing": "1.2"}');
+  }
+}
+

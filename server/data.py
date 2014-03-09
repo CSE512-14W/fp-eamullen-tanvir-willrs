@@ -25,7 +25,7 @@ class Data():
     try:
       (house, channel) = thing.split(".")
       if thing not in self.sources and os.path.exists("data/house_" + house + "/channel_" + channel + ".dat"):
-        self.sources[thing] = open("data/house_" + house + "/channel_" + channel + ".dat", "r")
+        self.sources[thing] = open("data/house_" + house + "/channel_" + channel + ".dat")
       #TODO: jump to requested day & time.
       if thing not in self.watchers:
         self.watchers[thing] = []
