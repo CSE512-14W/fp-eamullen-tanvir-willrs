@@ -26,7 +26,7 @@ rootLogger.setLevel(logging.ERROR)
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("index.html")
+        self.render("../index.html")
 
 class DataHandler(tornado.websocket.WebSocketHandler):
     data = Data()
@@ -56,6 +56,9 @@ class DataHandler(tornado.websocket.WebSocketHandler):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
+    (r"/lib/(.*)", tornado.web.StaticFileHandler, {'path': '../lib/'}),
+    (r"/script/(.*)", tornado.web.StaticFileHandler, {'path': '../script'}),
+    (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': '../static'}),
     (r"/data/([a-zA-Z0-9_]*)", DataHandler)
 ])
 
