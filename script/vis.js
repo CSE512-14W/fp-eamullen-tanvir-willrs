@@ -162,22 +162,19 @@ d3.dsv(" ", "text/plain")("server/data/house_1/labels.dat", function(r) {
   return r['mains'];
 }, getLabels);
 */
-window.addEventListener('load', function() {
-  var graph = new Rickshaw.Graph( {
+var data = [];
+var graph;
+var initgraph = function() {
+  graph = new Rickshaw.Graph( {
     element: document.getElementById("chart"), 
     width: 600, 
     height: 200, 
     series: [{
       color: 'steelblue',
-      data: [ 
-        { x: 0, y: 40 }, 
-        { x: 1, y: 49 }, 
-        { x: 2, y: 38 }, 
-        { x: 3, y: 30 }, 
-        { x: 4, y: 32 } ]
-      }]
-    });
-
+      data: data
+    }]
+  });
+  
   graph.render();
 
   var hoverDetail = new Rickshaw.Graph.HoverDetail( {
@@ -189,11 +186,20 @@ window.addEventListener('load', function() {
   });
 
   xAxis.render();
-});
+};
 
 var conn = new WebSocket('ws://' + location.host + '/data/stream');
+var current = 0;
 conn.addEventListener('message', function(m) {
-  console.log(m);
+  current = Number(JSON.parse(m.data).data);
+  if (current === 0 || current > 0) {
+    data.push({x: data.length, y: current});
+  }
+  if (data.length == 2) {
+    initgraph();
+  } else if (data.length > 2) {
+    graph.render()
+  }
   onmsg();
 }, true);
 
@@ -201,6 +207,7 @@ var tracking = 0;
 function onmsg() {
   if (!tracking) {
     conn.send('{"thing": "1.2"}');
+    tracking = 1;
   }
 }
 
