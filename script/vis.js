@@ -156,12 +156,12 @@ function ready() {
 var getLabels = function(d) {
   console.log(d);
 };
-
+/*
 //asynchronously load data files, and call ready when finished
-d3.dsv(" ", "text/plain")("low_freq/house_1/labels.dat", function(r) {
+d3.dsv(" ", "text/plain")("server/data/house_1/labels.dat", function(r) {
   return r['mains'];
 }, getLabels);
-
+*/
 window.addEventListener('load', function() {
   var graph = new Rickshaw.Graph( {
     element: document.getElementById("chart"), 
@@ -190,3 +190,5 @@ window.addEventListener('load', function() {
 
   xAxis.render();
 });
+
+var conn = new WebSocket('ws://' + location.host + '/data/stream');
