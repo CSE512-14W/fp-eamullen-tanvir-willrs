@@ -28,6 +28,13 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.render("../index.html")
 
+class LabelHandler(tornado.web.RequestHandler):
+    def get(self, thing):
+      try:
+        self.render("data/house_" + str(int(thing)) + "/labels.dat")
+      except:
+        self.render("../index.html")
+
 class DataHandler(tornado.websocket.WebSocketHandler):
     data = Data()
 
@@ -63,6 +70,7 @@ application = tornado.web.Application([
     (r"/lib/(.*)", tornado.web.StaticFileHandler, {'path': '../lib/'}),
     (r"/script/(.*)", tornado.web.StaticFileHandler, {'path': '../script'}),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': '../static'}),
+    (r"/label/(.*)", LabelHandler),
     (r"/data/([a-zA-Z0-9_]*)", DataHandler)
 ])
 
