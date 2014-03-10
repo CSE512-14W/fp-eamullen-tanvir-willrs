@@ -177,9 +177,9 @@ var initgraph = function() {
   
   graph.render();
 
-  var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+  var hoverDetail = new Rickshaw.Graph.HoverDetail({
       graph: graph
-  } );
+  });
 
   var xAxis = new Rickshaw.Graph.Axis.Time({
       graph: graph
@@ -206,7 +206,8 @@ conn.addEventListener('message', function(m) {
 var tracking = 0;
 function onmsg() {
   if (!tracking) {
-    conn.send('{"thing": "1.2"}');
+      //1.1.13.... means House 1, Channel 1, Start Time 13....
+    conn.send('{"thing": "1.1.1303132949"}');
     tracking = 1;
   }
 }
