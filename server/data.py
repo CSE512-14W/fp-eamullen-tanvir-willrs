@@ -38,7 +38,7 @@ class Data():
         (timestamp,data) = line.split(" ")
         if (float(timestamp) > self.begin_time[thing]):
           for cb in self.watchers[thing]:
-            to_send.append((cb,thing,data))
+            to_send.append((cb,thing,(timestamp,data)))
 
     #send everything that is enqueued to send
     #this ends up sending data 1 second early

@@ -35,7 +35,7 @@ var loadHouse = function(state) {
   state.toSend = [];
   loadChannels(state.house, function(channels) {
     for (var i = 0; i < channels.length; i++) {
-      state.toSend.push('{"thing": "1.' + (i+1) + '.1303132959.1303132979"}');
+      state.toSend.push('{"thing": "1.' + (i+1) + '.1303132929.1303132949"}');
     }
     console.warn(state.conn.readyState);
     if (state.conn.readyState === 1) {
@@ -58,7 +58,7 @@ var makeGraphs = function(state) {
 
   state.graphs = {};
   for (var i = 0; i < state.channels.length; i++) {
-    var thing = state.house + "." + (i + 1) + ".1303132959.1303132979";
+    var thing = state.house + "." + (i + 1) + ".1303132929.1303132949";
     var el = document.createElement('div');
     container.appendChild(el);
     var graph = {
@@ -112,8 +112,9 @@ var onMsg = function(state, m) {
     return;
   }
   state.graphs[msg.thing].data.push({
-    x: state.graphs[msg.thing].data.length,
-    y: Number(msg.data)
+    x: Number(msg.data[0]),
+      //x: state.graphs[msg.thing].data.length,
+    y: Number(msg.data[1])
   });
   state.graphs[msg.thing].refresh();
 };
