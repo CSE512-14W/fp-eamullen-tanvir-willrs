@@ -54,16 +54,21 @@ class DataHandler(tornado.websocket.WebSocketHandler):
         if hasattr(self, 'watching'):
           for item in self.watching:
             DataHandler.data.clean(item)
+          self.watching = []
 
     # On incoming message
     def on_message(self, msg):
         val = tornado.escape.json_decode(msg)
-        def onItem(thing, msg):
-          try:
-            self.write_message({'thing': thing, 'data': msg})
-          except:
-            pass
-        DataHandler.data.track(val['thing'], onItem)
+        if val['thing'] == 'reset':
+          self.on_close()
+        else:
+          def onItem(thing, msg):
+            try:
+              self.write_message({'thing': thing, 'data': msg})
+            except:
+              pass
+          DataHandler.data.track(val['thing'], onItem)
+          self.watching.append(onItem)
 
 application = tornado.web.Application([
     (r"/", MainHandler),

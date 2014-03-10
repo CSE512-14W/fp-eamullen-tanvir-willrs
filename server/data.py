@@ -32,7 +32,7 @@ class Data():
     for thing in self.sources:
       #TODO: deal with running off end / repeating day
       timestamp = self.current_time(thing) - 1
-      print "current time is: ", self.current_time(thing)
+      #print "current time is: ", self.current_time(thing)
       while (float(timestamp) < self.current_time(thing)):
         line = self.sources[thing].readline()
         (timestamp,data) = line.split(" ")
@@ -44,7 +44,6 @@ class Data():
     #this ends up sending data 1 second early
     #not a big deal
     for x in to_send:
-      print "sending: ", x[2]
       x[0](x[1],x[2])
 
     #return time until next emit
@@ -69,8 +68,11 @@ class Data():
 
   def clean(self, cb):
     for thing in self.watchers:
-      self.watchers[thing].remove(cb)
-      if len(self.watchers[thing]) == 0:
-        self.sources[thing].close()
-        del self.sources[thing]
-        del self.watchers[thing]
+      try:
+        self.watchers[thing].remove(cb)
+        if len(self.watchers[thing]) == 0:
+          self.sources[thing].close()
+          del self.sources[thing]
+          del self.watchers[thing]
+      except:
+        pass
