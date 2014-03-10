@@ -7,6 +7,7 @@ class Data():
     self.sources = dict()
     self.watchers = dict()
     self.time_diffs = dict()
+    self.begin_time = dict()
     self.run()
   
   #get current time in data time
@@ -35,8 +36,9 @@ class Data():
       while (float(timestamp) < self.current_time(thing)):
         line = self.sources[thing].readline()
         (timestamp,data) = line.split(" ")
-        for cb in self.watchers[thing]:
-          to_send.append((cb,thing,data))
+        if (float(timestamp) > self.begin_time[thing]):
+          for cb in self.watchers[thing]:
+            to_send.append((cb,thing,data))
 
     #send everything that is enqueued to send
     #this ends up sending data 1 second early
@@ -51,13 +53,14 @@ class Data():
   def track(self, thing, cb):
     print "tracking: ", thing
     try:
-      (house, channel, start_time) = thing.split(".")
+      (house, channel, begining_of_time, start_time) = thing.split(".")
       if thing not in self.sources and os.path.exists("data/house_" + house + "/channel_" + channel + ".dat"):
         self.sources[thing] = open("data/house_" + house + "/channel_" + channel + ".dat")
       #TODO: jump to requested day & time.
       #keep actual time started and posted time started
       #for each connection
       self.time_diffs[thing] = time.time() - int(start_time)
+      self.begin_time[thing] = int(begining_of_time)
       if thing not in self.watchers:
         self.watchers[thing] = []
       self.watchers[thing].append(cb)

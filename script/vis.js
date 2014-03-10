@@ -207,7 +207,7 @@ var tracking = 0;
 function onmsg() {
   if (!tracking) {
       //1.1.13.... means House 1, Channel 1, Start Time 13....
-    conn.send('{"thing": "1.1.1303132949"}');
+    conn.send('{"thing": "1.1.1303132959.1303132979"}');
     tracking = 1;
   }
 }
