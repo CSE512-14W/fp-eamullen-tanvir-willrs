@@ -55,7 +55,6 @@ class Data():
       (house, channel, begining_of_time, start_time) = thing.split(".")
       if thing not in self.sources and os.path.exists("data/house_" + house + "/channel_" + channel + ".dat"):
         self.sources[thing] = open("data/house_" + house + "/channel_" + channel + ".dat")
-      #TODO: jump to requested day & time.
       #keep actual time started and posted time started
       #for each connection
       self.time_diffs[thing] = time.time() - int(start_time)
