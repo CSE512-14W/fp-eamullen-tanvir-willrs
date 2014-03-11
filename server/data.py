@@ -3,7 +3,6 @@ import threading, datetime
 
 class Data():
   def __init__(self):
-    print "running init"
     self.sources = dict()
     self.watchers = dict()
     self.time_diffs = dict()
@@ -50,7 +49,6 @@ class Data():
     return delay
 
   def track(self, thing, cb):
-    print "tracking: ", thing
     try:
       (house, channel, begining_of_time, start_time) = thing.split(".")
       if thing not in self.sources and os.path.exists("data/house_" + house + "/channel_" + channel + ".dat"):
