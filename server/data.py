@@ -7,6 +7,7 @@ class Data():
     self.watchers = dict()
     self.time_diffs = dict()
     self.begin_time = dict()
+    self.to_send = []
     self.run()
   
   #get current time in data time
@@ -24,9 +25,6 @@ class Data():
     #TODO: set to something else by looking at data
     delay = 1
 
-    #keep a list of everything to send this time
-    to_send = []
-
     #read new data, enqueue to send if now time to do so
     for thing in self.sources:
       #TODO: deal with running off end / repeating day
@@ -37,13 +35,20 @@ class Data():
         (timestamp,data) = line.split(" ")
         if (float(timestamp) > self.begin_time[thing]):
           for cb in self.watchers[thing]:
-            to_send.append((cb,thing,(timestamp,data)))
+            self.to_send.append((cb,thing,(timestamp,data)))
+
+    sent = []
 
     #send everything that is enqueued to send
     #this ends up sending data 1 second early
     #not a big deal
-    for x in to_send:
-      x[0](x[1],x[2])
+    for x in self.to_send:
+      if (float(x[2][0]) < self.current_time(thing)):
+        x[0](x[1],x[2])
+        sent.append(x)
+    
+    for x in sent:
+      self.to_send.remove(x)
 
     #return time until next emit
     return delay

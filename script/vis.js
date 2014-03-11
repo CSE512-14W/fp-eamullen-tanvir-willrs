@@ -21,6 +21,9 @@ var setupHouseChooser = function(state) {
   document.getElementById('choosehouse').appendChild(chooser);
 };
 
+var start_time = 1303132929
+var curr_time = 1303133250
+
 var loadHouse = function(state) {
   if (state.conn) {
     state.conn.send('{"thing":"reset"}');
@@ -37,7 +40,7 @@ var loadHouse = function(state) {
   loadChannels(state.house, function(channels) {
     for (var i = 0; i < channels.length; i++) {
       console.warn('loading ' + state.house);
-      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.1303132929.1303132949"}');
+      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.' + start_time + '.' + curr_time + '"}');
     }
     console.warn(state.conn.readyState);
     if (state.conn.readyState === 1) {
@@ -60,7 +63,7 @@ var makeGraphs = function(state) {
 
   state.graphs = {};
   for (var i = 0; i < state.channels.length; i++) {
-    var thing = state.house + "." + (i + 1) + ".1303132929.1303132949";
+    var thing = state.house + "." + (i + 1) + "." + start_time + "." + curr_time;
     var el = document.createElement('div');
     container.appendChild(el);
     var graph = {
