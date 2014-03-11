@@ -15,6 +15,7 @@ var setupHouseChooser = function(state) {
   }
   chooser.addEventListener('change', function() {
     state.house = chooser.value;
+    console.warn('state house now ' + state.house);
     loadHouse(state);
   });
   document.getElementById('choosehouse').appendChild(chooser);
@@ -35,7 +36,8 @@ var loadHouse = function(state) {
   state.toSend = [];
   loadChannels(state.house, function(channels) {
     for (var i = 0; i < channels.length; i++) {
-      state.toSend.push('{"thing": "1.' + (i+1) + '.1303132929.1303132949"}');
+      console.warn('loading ' + state.house);
+      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.1303132929.1303132949"}');
     }
     console.warn(state.conn.readyState);
     if (state.conn.readyState === 1) {
@@ -108,7 +110,7 @@ var onMsg = function(state, m) {
     return;
   }
   if (state.graphs[msg.thing] == undefined) {
-    console.warn('no' + msg.thing);
+    //console.warn('no' + msg.thing);
     return;
   }
   state.graphs[msg.thing].data.push({

@@ -67,12 +67,18 @@ class Data():
       pass
 
   def clean(self, cb):
+    toclose = [];
     for thing in self.watchers:
       try:
         self.watchers[thing].remove(cb)
         if len(self.watchers[thing]) == 0:
-          self.sources[thing].close()
-          del self.sources[thing]
-          del self.watchers[thing]
+          toclose.append(thing);
+      except:
+        pass
+    for thing in toclose:
+      try:
+        self.sources[thing].close()
+        del self.sources[thing]
+        del self.watchers[thing]
       except:
         pass
