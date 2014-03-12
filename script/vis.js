@@ -60,6 +60,18 @@ var loadChannels = function(thing, cb) {
   });
 };
 
+var makeLabel = function(state, i) {
+  var container = document.createElement('div');
+  container.className = 'label';
+
+  var img = document.createElement('img');
+  img.src = '/static/pics/' + state.channels[i] + '.svg';
+  img.style.height = '150px';
+  container.appendChild(img);
+  
+  return container;
+};
+
 var makeGraphs = function(state) {
   var container = document.getElementById('container');
   container.innerHTML = '';
@@ -70,9 +82,7 @@ var makeGraphs = function(state) {
     var el = document.createElement('div');
     container.appendChild(el);
     
-    var label = document.createElement('div');
-    label.className = 'label';
-    label.innerHTML = state.channels[i];
+    var label = makeLabel(state, i);
     container.appendChild(label);
     var graph = {
       data: [],

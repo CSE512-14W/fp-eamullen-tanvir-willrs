@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Calque_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g id="Captions">
+	<rect x="-192" width="185" height="99"/>
+	<rect y="-36" width="100" height="30"/>
+	<text transform="matrix(1 0 0 1 66 -19.5)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="2.4">http://thenounproject.com</text>
+	<text transform="matrix(1 0 0 1 7.166 -24.5)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="6.1578">The Noun Project</text>
+	<text transform="matrix(1 0 0 1 8.2861 -19.7002)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="4">Icon Template</text>
+	<text transform="matrix(1 0 0 1 -178.5 10.5)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="6.1578">Reminders</text>
+	<line fill="#000000" stroke="#FFFFFF" stroke-miterlimit="10" x1="8" y1="-14.5" x2="18" y2="-14.5"/>
+	<line fill="#000000" stroke="#FFFFFF" stroke-miterlimit="10" x1="-179" y1="16.5" x2="-162" y2="16.5"/>
+	<g>
+		<g>
+			<g>
+				<rect x="-170.802" y="31.318" fill="#000000" width="8.721" height="8.642"/>
+				<path fill="#000000" d="M-164.455,42.312h4.747v-4.703h-4.747V42.312z M-159.266,42.749h-5.63V37.17h5.63V42.749      L-159.266,42.749z M-166.221,44.062h8.279v-8.203h-8.279V44.062L-166.221,44.062z M-157.5,44.5h-9.163v-9.079h9.163V44.5      L-157.5,44.5z"/>
+				<polygon fill="#000000" points="-166.149,44.133 -166.292,43.991 -158.013,35.787 -157.871,35.929     "/>
+			</g>
+		</g>
+	</g>
+	<rect x="-179" y="58" fill="none" width="35" height="32.5"/>
+	<text transform="matrix(1 0 0 1 -179 60.1289)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="3">Strokes</text>
+	<text transform="matrix(1 0 0 1 -179 65.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">Try to keep strokes at 4px</text>
+	<text transform="matrix(1 0 0 1 -179 70.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">Minimum stroke weight is 2px</text>
+	<text transform="matrix(1 0 0 1 -179 74.6289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">For thicker strokes use even </text>
+	<text transform="matrix(1 0 0 1 -179 77.6289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">numbers: 6px, 8px etc.</text>
+	<text transform="matrix(1 0 0 1 -179 82.1289)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="2.4">Remember to expand strokes </text>
+	<text transform="matrix(1 0 0 1 -179 85.1289)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="2.4">before saving as an SVG </text>
+	<rect x="-136.5" y="58" fill="none" width="35" height="32.5"/>
+	<text transform="matrix(1 0 0 1 -136.5 60.1289)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="3">Size</text>
+	<text transform="matrix(1 0 0 1 -136.5 65.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">Cannot be wider or taller than </text>
+	<text transform="matrix(1 0 0 1 -136.5 68.6289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">100px (artboard size)</text>
+	<text transform="matrix(1 0 0 1 -136.5 73.6289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">Scale your icon to fill as much of </text>
+	<text transform="matrix(1 0 0 1 -136.5 76.6289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">the artboard as possible</text>
+	<rect x="-94" y="58" fill="none" width="35" height="32.5"/>
+	<text transform="matrix(1 0 0 1 -94 60.1289)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="3">Ungroup</text>
+	<text transform="matrix(1 0 0 1 -94 65.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">If your design has more than one </text>
+	<text transform="matrix(1 0 0 1 -94 68.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">shape, make sure to ungroup</text>
+	<rect x="-50" y="58" fill="none" width="35" height="32.5"/>
+	<text transform="matrix(1 0 0 1 -50 60.1289)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="3">Save as</text>
+	<text transform="matrix(1 0 0 1 -50 65.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">Save as .SVG and make sure &#8220;Use </text>
+	<text transform="matrix(1 0 0 1 -50 68.1289)" fill="#000000" font-family="'ArialMT'" font-size="2.4">Artboards&#8221; is checked</text>
+	<text transform="matrix(1.0074 0 0 1 -125.542 30.5928)" fill="#000000" font-family="'ArialMT'" font-size="2.5731">100px</text>
+	<text transform="matrix(1.0074 0 0 1 -41 39)" fill="#000000" font-family="'HelveticaCondensed-Medium'" font-size="5.1462">.SVG</text>
+	<rect x="-126.514" y="34.815" fill="#000000" width="10.261" height="10.185"/>
+	<rect x="-126.477" y="31.766" fill="#000000" width="0.522" height="2.337"/>
+	<rect x="-116.813" y="31.766" fill="#000000" width="0.523" height="2.337"/>
+	<rect x="-127" y="32.337" fill="#000000" width="11.233" height="0.572"/>
+	<g>
+		<rect x="-83.805" y="33.844" fill="#000000" width="10.305" height="10.156"/>
+		<rect x="-76.809" y="28.707" fill="#000000" width="3.308" height="3.261"/>
+	</g>
+	<rect x="-178.5" y="22.5" fill="#000000" stroke="#FFFFFF" stroke-miterlimit="10" width="30" height="30"/>
+	<rect x="-136.5" y="22.5" fill="#000000" stroke="#FFFFFF" stroke-miterlimit="10" width="30" height="30"/>
+	<rect x="-93.5" y="22.5" fill="#000000" stroke="#FFFFFF" stroke-miterlimit="10" width="30" height="30"/>
+	<rect x="-49.5" y="22.5" fill="#000000" stroke="#FFFFFF" stroke-miterlimit="10" width="30" height="30"/>
+</g>
+<path d="M30.871,28.549c0,0,2.098-4.193,0.806-6.938c-1.289-2.74-5.322-3.871-5.161-9.839c0.163-5.969,5.807-7.742,6.453-7.904  c0,0,0.321,0.806-0.161,1.773c-0.484,0.971-4.194,2.583-2.419,6.131c1.776,3.549,6.774,3.872,4.355,10.001  C32.323,27.903,32.323,29.68,30.871,28.549z"/>
+<path d="M42.485,28.549c0,0,2.098-4.193,0.808-6.938c-1.292-2.74-5.324-3.871-5.163-9.839c0.163-5.969,5.807-7.742,6.453-7.904  c0,0,0.321,0.806-0.163,1.773c-0.483,0.971-4.193,2.583-2.418,6.131c1.776,3.549,6.775,3.872,4.356,10.001  C43.938,27.903,43.938,29.68,42.485,28.549z"/>
+<path d="M54.102,28.549c0,0,2.097-4.193,0.807-6.938c-1.291-2.74-5.323-3.871-5.163-9.839c0.162-5.969,5.807-7.742,6.453-7.904  c0,0,0.323,0.806-0.16,1.773c-0.486,0.971-4.196,2.583-2.421,6.131c1.773,3.549,6.773,3.872,4.355,10.001  C55.551,27.903,55.551,29.68,54.102,28.549z"/>
+<path d="M65.715,28.549c0,0,2.098-4.193,0.809-6.938c-1.293-2.74-5.323-3.871-5.162-9.839c0.16-5.969,5.807-7.742,6.451-7.904  c0,0,0.322,0.806-0.162,1.773c-0.482,0.971-4.191,2.583-2.42,6.131c1.775,3.549,6.774,3.872,4.355,10.001  C67.167,27.903,67.167,29.68,65.715,28.549z"/>
+<path d="M92.189,45.463c-1.587,0-2.947,0.957-3.547,2.323c-0.208-0.046-0.423-0.073-0.645-0.073h-3.252v-8.109  c0-2.554-1.539-4.625-3.438-4.625s-3.438,2.071-3.438,4.625v8.109h-6.387v-8.109c0-2.554-1.539-4.625-3.438-4.625  s-3.438,2.071-3.438,4.625v8.109h-6.387v-8.109c0-2.554-1.539-4.625-3.438-4.625s-3.438,2.071-3.438,4.625v8.109H44.96v-8.109  c0-2.554-1.539-4.625-3.438-4.625s-3.438,2.071-3.438,4.625v8.109h-6.386v-8.109c0-2.554-1.539-4.625-3.438-4.625  s-3.438,2.071-3.438,4.625v8.109h-6.386v-8.109c0-2.554-1.539-4.625-3.438-4.625s-3.438,2.071-3.438,4.625v8.109H9.031  c-1.657,0-3,1.343-3,3c0,1.655,1.343,2.998,3,2.998h2.531v28.5H9.031c-1.657,0-3,0.896-3,2s1.343,2,3,2h2.531v5.608  c0,2.554,1.539,4.625,3.438,4.625s3.438-2.071,3.438-4.625v-5.608h6.386v5.608c0,2.554,1.539,4.625,3.438,4.625  s3.438-2.071,3.438-4.625v-5.608h6.386v5.608c0,2.554,1.539,4.625,3.438,4.625s3.438-2.071,3.438-4.625v-5.608h6.388v5.608  c0,2.554,1.539,4.625,3.438,4.625s3.438-2.071,3.438-4.625v-5.608h6.387v5.608c0,2.554,1.539,4.625,3.438,4.625  s3.438-2.071,3.438-4.625v-5.608h6.387v5.608c0,2.554,1.539,4.625,3.438,4.625s3.438-2.071,3.438-4.625v-5.608h3.252  c1.657,0,3-0.896,3-2s-1.343-2-3-2h-3.252v-28.5h3.252c0.222,0,0.437-0.027,0.645-0.073c0.6,1.366,1.96,2.323,3.547,2.323  c2.14,0,3.875-1.735,3.875-3.875v-2.748C96.064,47.198,94.329,45.463,92.189,45.463z M18.438,82.211v-28.5h6.386v28.5H18.438z   M31.699,82.211v-28.5h6.386v28.5H31.699z M44.96,82.211v-28.5h6.388v28.5H44.96z M58.223,82.211v-28.5h6.387v28.5H58.223z   M77.871,82.211h-6.387v-28.5h6.387V82.211z"/>
+</svg>
