@@ -66,6 +66,11 @@ var makeGraphs = function(state) {
     var thing = state.house + "." + (i + 1) + "." + start_time + "." + curr_time;
     var el = document.createElement('div');
     container.appendChild(el);
+    
+    var label = document.createElement('div');
+    label.className = 'label';
+    label.innerHTML = state.channels[i];
+    container.appendChild(label);
     var graph = {
       data: [],
       el: el
