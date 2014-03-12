@@ -54,7 +54,10 @@ var loadHouse = function(state) {
 var loadChannels = function(thing, cb) {
   d3.dsv(" ", "text/plain")("label/" + thing, function(r) {
     return r['mains'];
-  }, cb);
+  }, function(vals) {
+    vals.unshift('mains');
+    cb(vals);
+  });
 };
 
 var makeGraphs = function(state) {
