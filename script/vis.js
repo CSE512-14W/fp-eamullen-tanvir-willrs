@@ -65,6 +65,7 @@ var makeGraphs = function(state) {
   for (var i = 0; i < state.channels.length; i++) {
     var thing = state.house + "." + (i + 1) + "." + start_time + "." + curr_time;
     var el = document.createElement('div');
+    el.className = "graph";
     container.appendChild(el);
     var graph = {
       data: [],
@@ -96,6 +97,11 @@ var makeGraphs = function(state) {
             graph: this.graph
         });
 
+	var yAxis = new Rickshaw.Graph.Axis.Y({
+	    graph: this.graph
+	});
+
+	yAxis.render();
         xAxis.render();
       }
     }
