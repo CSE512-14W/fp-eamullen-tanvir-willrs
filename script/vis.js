@@ -80,7 +80,7 @@ var makeGraphs = function(state) {
       if (this.data.length == 2) {
         this.graph = new Rickshaw.Graph( {
           element: this.el,
-          width: 600, 
+          width: 900, 
           height: 200, 
           series: [{
             color: 'steelblue',
