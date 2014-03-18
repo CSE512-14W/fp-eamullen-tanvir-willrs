@@ -53,6 +53,65 @@ class Data():
     #return time until next emit
     return delay
 
+  #get a summary of a certain channel, from begin to end, with num data points
+  def summary(self, house, channel, begin, end, num):
+    path = "data/house_" + str(house) + "/channel_" + str(channel) + ".dat"
+    if os.path.exists(path):
+      try:
+        data = open(path)
+      except:
+        return []
+
+      t = begin-1
+      while (t < begin):
+        line = data.readline()
+        (t,d) = line.split(" ")
+        t = int(t)
+        d = float(d)
+
+      all_data = []
+
+      while (t < end):
+        line = data.readline()
+        (t,d) = line.split(" ")
+        t = int(t)
+        d = float(d)
+        all_data.append((t,d))
+
+
+      #number of data points per point in output
+      freq = float(len(all_data))/num
+      
+      freq_incr = 0
+      loc_tot = []
+      n = 0
+
+      to_ret = []
+
+      def avg(l):
+        t = 0
+        d = 0
+        length = len(l)
+        for dat in l:
+          t += dat[0]
+          d += dat[1]
+        return (float(t)/length,float(d)/length)
+
+      for dat in all_data:
+        loc_tot.append(dat)
+        n += 1
+        
+        if (n > freq_incr):
+          freq_incr += freq
+          to_ret.append(avg(loc_tot))
+          loc_tot = []
+          
+      return to_ret
+
+    #failure case
+    return []
+      
+
   def track(self, thing, cb):
     try:
       (house, channel, begining_of_time, start_time) = thing.split(".")
@@ -61,12 +120,21 @@ class Data():
       #keep actual time started and posted time started
       #for each connection
       self.time_diffs[thing] = time.time() - int(start_time)
-      self.begin_time[thing] = int(begining_of_time)
+      self.begin_time[thing] = int(start_time)
       if thing not in self.watchers:
         self.watchers[thing] = []
       self.watchers[thing].append(cb)
+      
+      #send summary from begining_of_time to start_time
+      summ = self.summary(int(house),int(channel),int(begining_of_time),int(start_time),300)
+      print "sending summary: ", summ
+      for d in summ:
+        cb(thing,d)
+
     except:
-      pass
+      e = sys.exc_info()[0]
+      print str(e)
+      raise
 
   def clean(self, cb):
     toclose = [];

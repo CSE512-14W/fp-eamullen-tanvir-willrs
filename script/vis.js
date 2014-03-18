@@ -22,7 +22,7 @@ var setupHouseChooser = function(state) {
 };
 
 var start_time = 1303132929
-var curr_time = 1303133250
+var curr_time = 1303139250
 
 var loadHouse = function(state) {
   if (state.conn) {
