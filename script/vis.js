@@ -22,7 +22,7 @@ var setupHouseChooser = function(state) {
 };
 
 var start_time = 1303132929
-var curr_time = 1303133250
+var curr_time = 1303139250
 
 var loadHouse = function(state) {
   if (state.conn) {
@@ -80,6 +80,7 @@ var makeGraphs = function(state) {
   for (var i = 0; i < state.channels.length; i++) {
     var thing = state.house + "." + (i + 1) + "." + start_time + "." + curr_time;
     var el = document.createElement('div');
+    el.className = "graph";
     container.appendChild(el);
     
     var label = makeLabel(state, i);
@@ -114,6 +115,11 @@ var makeGraphs = function(state) {
             graph: this.graph
         });
 
+	var yAxis = new Rickshaw.Graph.Axis.Y({
+	    graph: this.graph
+	});
+
+	yAxis.render();
         xAxis.render();
       }
     }

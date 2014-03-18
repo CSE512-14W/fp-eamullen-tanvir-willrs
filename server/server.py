@@ -42,7 +42,7 @@ class DataHandler(tornado.websocket.WebSocketHandler):
         return True
 
     def open(self, thing):
-        print "asked for ", thing
+        #print "asked for ", thing
         self.watching = []
 
         self.write_message({'thing': 0, 'data': 'connected'});

@@ -12,6 +12,7 @@ header {
 #container {
   width: 750px;
   margin: auto;
+  position: relative;
 }
 
 .rickshaw_graph {
@@ -20,10 +21,18 @@ header {
 }
 
 .label {
+  margin-top: -200px;
+  position: absolute;
   display: inline-block;
+  right: 0;
 }
 
 .label img:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+
+.graph {
+    margin-top: 1.5cm;
+    margin-bottom: 1.5cm;
 }
