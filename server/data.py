@@ -26,7 +26,8 @@ class Data():
     delay = 1
 
     #read new data, enqueue to send if now time to do so
-    for thing in self.sources:
+    source_copy = self.sources.copy()
+    for thing in source_copy:
       #TODO: deal with running off end / repeating day
       timestamp = self.current_time(thing) - 1
       #print "current time is: ", self.current_time(thing)
