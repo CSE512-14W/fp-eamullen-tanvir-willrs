@@ -1,0 +1,12 @@
+* Watts (instead of numbers) on Y axis
+* mouseover text for icons saying what they are (name)
++ make different icon for outlets, just make up something, but not just outlet picture
++ total power today readout on top of screen
++ rework icon layout/size/position
++ have icons have on light (little green light) when power over 0
+*/+ when click on icon, show total amount of power used so far, and dollars. (Eric will calculate the data needed, Will will build infrastructure to show it).
+
+
++ combine total power into one graph
+* universal scale for Y axis
+* get rid of undefined on graph tooltip (Why is this happening?)
