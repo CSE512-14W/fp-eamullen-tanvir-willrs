@@ -25,6 +25,20 @@ class Data():
     #TODO: set to something else by looking at data
     delay = 1
 
+    #take in a thing, return if it is one of the two main
+    #power lines
+    def is_main_power(th):
+      return (int(th.split(".")[1]) < 3)
+
+    def is_chan_1(th):
+      return (int(th.split(".")[1]) == 1)
+
+    #main power channels
+    chan_1 = {}
+    chan_2 = {}
+
+    chan_1_thing = None
+
     #read new data, enqueue to send if now time to do so
     source_copy = self.sources.copy()
     for thing in source_copy:
@@ -35,14 +49,19 @@ class Data():
         line = self.sources[thing].readline()
         (timestamp,data) = line.split(" ")
         if (float(timestamp) > self.begin_time[thing]):
-          for cb in self.watchers[thing]:
-            self.to_send.append((cb,thing,(timestamp,data)))
+          if is_main_power(thing):
+            if is_chan_1(thing):
+              chan_1[int(timestamp)] = data
+              chan_1_thing = thing
+            else:
+              chan_2[int(timestamp)] = data
+          else:
+            for cb in self.watchers[thing]:
+              self.to_send.append((cb,thing,(timestamp,data)))
 
     sent = []
 
-    #send everything that is enqueued to send
-    #this ends up sending data 1 second early
-    #not a big deal
+    #send single appliance level data
     for x in self.to_send:
       if (float(x[2][0]) < self.current_time(thing)):
         x[0](x[1],x[2])
@@ -50,6 +69,16 @@ class Data():
     
     for x in sent:
       self.to_send.remove(x)
+
+    #send main line power info
+    for k in chan_1:
+      if k in chan_2:
+        chan_1[k] += chan_2[k]
+
+    if (chan_1_thing != None):
+      for cb in self.watchers[chan_1_thing]:
+        for k in chan_1:
+          cb(chan_1_thing,(k,chan_1[k]))
 
     #return time until next emit
     return delay
@@ -106,6 +135,13 @@ class Data():
           freq_incr += freq
           to_ret.append(avg(loc_tot))
           loc_tot = []
+
+      if (channel == 1):
+        summ_2 = self.summary(house,2,begin,end,num)
+        def agg(x):
+          (a,b) = x
+          return (a[0],a[1]+b[1])
+        to_ret = map(agg,zip(to_ret,summ_2))
           
       return to_ret
 
@@ -116,6 +152,8 @@ class Data():
   def track(self, thing, cb):
     try:
       (house, channel, begining_of_time, start_time) = thing.split(".")
+      if (channel == "2"):
+        return
       if thing not in self.sources and os.path.exists("data/house_" + house + "/channel_" + channel + ".dat"):
         self.sources[thing] = open("data/house_" + house + "/channel_" + channel + ".dat")
       #keep actual time started and posted time started
