@@ -79,7 +79,7 @@ var makeGraphs = function(state) {
   for (var i = 0; i < state.channels.length; i++) {
     var thing = state.house + "." + (i + 1) + "." + start_time + "." + curr_time;
     var el = document.createElement('div');
-    el.className = "graph";
+    el.className = "graph hide";
     container.appendChild(el);
     
     var label = makeLabel(state, i);
@@ -97,6 +97,7 @@ var makeGraphs = function(state) {
       }
 
       if (this.data.length >= 2 && !this.graph) {
+        this.el.className = "graph";
         this.graph = new Rickshaw.Graph( {
           element: this.el,
           width: 600, 
