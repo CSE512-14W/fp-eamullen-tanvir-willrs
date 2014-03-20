@@ -107,7 +107,7 @@ var makeGraphs = function(state) {
             data: this.data
           }],
           min: 0,
-          max: 1000
+          max: 2000
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
