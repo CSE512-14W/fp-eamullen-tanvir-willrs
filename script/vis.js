@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
   var state = {
-    numHouses: 6,
+    numHouses: 5,
     house: 1
   };
   window.state = state;
