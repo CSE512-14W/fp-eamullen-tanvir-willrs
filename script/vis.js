@@ -66,7 +66,10 @@ var makeLabel = function(state, i) {
   var img = document.createElement('img');
   img.src = '/static/pics/' + state.channels[i] + '.svg';
   img.style.height = '150px';
+  var text = document.createElement('span');
+  text.innerText = state.channels[i];
   container.appendChild(img);
+  container.appendChild(text);
   
   return container;
 };
