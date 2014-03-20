@@ -167,8 +167,7 @@ class Data():
       #send summary from begining_of_time to start_time
       summ = self.summary(int(house),int(channel),int(begining_of_time),int(start_time),300)
       #print "sending summary: ", summ
-      for d in summ:
-        cb(thing,d)
+      cb(thing, summ)
 
     except:
       e = sys.exc_info()[0]

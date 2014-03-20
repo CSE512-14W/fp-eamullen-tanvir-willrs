@@ -92,11 +92,11 @@ var makeGraphs = function(state) {
     state.graphs[thing] = graph;
       
     graph.refresh = function() {
-      if (this.data.length > 2) {
+      if (this.data.length > 2 && this.graph) {
         this.graph.render();
       }
 
-      if (this.data.length == 2) {
+      if (this.data.length >= 2 && !this.graph) {
         this.graph = new Rickshaw.Graph( {
           element: this.el,
           width: 600, 
@@ -143,11 +143,19 @@ var onMsg = function(state, m) {
     //console.warn('no' + msg.thing);
     return;
   }
-  state.graphs[msg.thing].data.push({
-    x: Number(msg.data[0]),
-      //x: state.graphs[msg.thing].data.length,
-    y: Number(msg.data[1])
-  });
+  if (msg.data.length > 2) {
+    for (var i = 0; i < msg.data.length; i++) {
+      state.graphs[msg.thing].data.push({
+        x: Number(msg.data[i][0]),
+        y: Number(msg.data[i][1])
+      });
+    }
+  } else {
+    state.graphs[msg.thing].data.push({
+      x: Number(msg.data[0]),
+      y: Number(msg.data[1])
+    });
+  }
   state.graphs[msg.thing].refresh();
 };
 
