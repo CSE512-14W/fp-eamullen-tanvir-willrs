@@ -3,6 +3,7 @@ window.addEventListener('load', function() {
     numHouses: 6,
     house: 1
   };
+  window.state = state;
   setupHouseChooser(state);
   loadHouse(state);
 }, true);
@@ -39,10 +40,8 @@ var loadHouse = function(state) {
   state.toSend = [];
   loadChannels(state.house, function(channels) {
     for (var i = 0; i < channels.length; i++) {
-      console.warn('loading ' + state.house);
       state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.' + start_time + '.' + curr_time + '"}');
     }
-    console.warn(state.conn.readyState);
     if (state.conn.readyState === 1) {
       onMsg(state, {data:"{}"});
     }
@@ -119,11 +118,11 @@ var makeGraphs = function(state) {
             graph: this.graph
         });
 
-	var yAxis = new Rickshaw.Graph.Axis.Y({
-	    graph: this.graph,
-	});
+        var yAxis = new Rickshaw.Graph.Axis.Y({
+          graph: this.graph,
+        });
 
-	yAxis.render();
+        yAxis.render();
         xAxis.render();
       }
     }
