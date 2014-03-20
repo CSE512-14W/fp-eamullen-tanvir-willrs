@@ -39,8 +39,10 @@ var loadHouse = function(state) {
   state.toSend = [];
   loadChannels(state.house, function(channels) {
     for (var i = 0; i < channels.length; i++) {
-      console.warn('loading ' + state.house);
-      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.' + start_time + '.' + curr_time + '"}');
+      if (i != 2) {     
+	  console.warn('loading ' + state.house);
+	  state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.' + start_time + '.' + curr_time + '"}');
+      }
     }
     console.warn(state.conn.readyState);
     if (state.conn.readyState === 1) {
@@ -108,7 +110,7 @@ var makeGraphs = function(state) {
             data: this.data
           }],
           min: 0,
-          max: 1000
+          max: 2000
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
