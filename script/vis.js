@@ -87,7 +87,8 @@ var makeGraphs = function(state) {
     container.appendChild(label);
     var graph = {
       data: [],
-      el: el
+      el: el,
+      name: state.channels[i]
     };
     state.graphs[thing] = graph;
       
@@ -102,9 +103,12 @@ var makeGraphs = function(state) {
           width: 600, 
           height: 200, 
           series: [{
+            name: this.name,
             color: 'steelblue',
             data: this.data
-          }]
+          }],
+          min: 0,
+          max: 1000
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
@@ -116,7 +120,7 @@ var makeGraphs = function(state) {
         });
 
 	var yAxis = new Rickshaw.Graph.Axis.Y({
-	    graph: this.graph
+	    graph: this.graph,
 	});
 
 	yAxis.render();
