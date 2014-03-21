@@ -62,26 +62,38 @@ var loadChannels = function(thing, cb) {
 var makeLabel = function(state, i) {
   var container = document.createElement('div');
   container.className = 'label';
+  container.addEventListener('click', toggleDetails.bind({}, state, i), false);
 
   var img = document.createElement('img');
   img.src = '/static/pics/' + state.channels[i] + '.svg';
   img.style.height = '150px';
   var text = document.createElement('span');
   text.innerText = state.channels[i];
-
-  var on = document.createElement('img');
-  on.src = "http://www.mediaworks7.com/public/images/bg/green-light.png"
-  on.style.height = '20px';
-  on.style.width = '20px';
-  on.style.position = 'relative';
-  on.style.top = '-150px';
-
   container.appendChild(img);
   container.appendChild(text);
-  container.appendChild(on);
-
   
   return container;
+};
+
+var toggleDetails = function(state, i) {
+  if (!state.details || state.details.i != i) {
+    if (state.details) {
+      var el = state.details.el;
+      document.body.removeChild(el);
+    }
+    state.details = {
+      i : i,
+      el: document.createElement('div')
+    };
+    var el = state.details.el;
+    document.body.appendChild(el);
+    el.className = 'details';
+    el.innerHTML = 'Details for channel ' + i;
+  } else {
+    var el = state.details.el;
+    document.body.removeChild(el);
+    delete state.details;
+  }
 };
 
 var makeGraphs = function(state) {
@@ -100,8 +112,7 @@ var makeGraphs = function(state) {
     var graph = {
       data: [],
       el: el,
-      name: state.channels[i],
-      total: 0.0
+      name: state.channels[i]
     };
     state.graphs[thing] = graph;
       
@@ -139,7 +150,7 @@ var makeGraphs = function(state) {
         var yAxis = new Rickshaw.Graph.Axis.Y({
           graph: this.graph,
           tickFormat: function(x) {
-            return x + ' W';
+            return x + ' ';
           }
         });
 
@@ -170,17 +181,12 @@ var onMsg = function(state, m) {
         x: Number(msg.data[i][0]),
         y: Number(msg.data[i][1])
       });
-      var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3)
-      state.graphs[msg.thing].total += msg.data[i][1] * mul;
     }
   } else {
     state.graphs[msg.thing].data.push({
       x: Number(msg.data[0]),
       y: Number(msg.data[1])
     });
-    var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3)
-    state.graphs[msg.thing].total += msg.data[1] * mul;
   }
   state.graphs[msg.thing].refresh();
 };
-
