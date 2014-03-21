@@ -140,6 +140,7 @@ var makeGraphs = function(state) {
     var graph = {
       data: [],
       el: el,
+      label: label,
       name: state.channels[i],
       total: 0.0
     };
@@ -148,6 +149,11 @@ var makeGraphs = function(state) {
     graph.refresh = function() {
       if (this.data.length > 2 && this.graph) {
         this.graph.render();
+        if (this.data[this.data.length - 1].y == 0) {
+          this.label.className = "label off";
+        } else {
+          this.label.className = "label";
+        }
       }
 
       if (this.data.length >= 2 && !this.graph) {
