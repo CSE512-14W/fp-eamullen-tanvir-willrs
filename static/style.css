@@ -42,6 +42,11 @@ header {
     margin-bottom: 1.5cm;
 }
 
+img.onLight {
+  width: 20px;
+  position: absolute;
+}
+
 .hide {
   display: none;
 }
