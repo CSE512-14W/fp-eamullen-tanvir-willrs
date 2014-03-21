@@ -19,28 +19,31 @@
     <br/>
 
     <div class='pub' data-spy="scroll" data-target=".navbar">
-
-      <h1 class="title">Final Project Template</h1>
+      <h1 class="title">Disaggregated Energy Use Visualization</h1>
       <div class="authors">
-        <a href="http://jheer.org">Jeffrey Heer</a>,
-        <a href="http://kanitw.yellowpigz.com">Kanit Wongsuphasawat</a>
+	Md Tanvir Islam Aumi, Eric Mullen, Will Scott
       </div>
 
       <div class="figure">
-        <img src="summary.png" width="100%"/>
-        <div class="caption">William Playfair’s classic chart comparing the price of wheat and wages in England recreated in the Lyra VDE.</div>
+        <img src="screenshots/main_site.png" width="100%"/>
+        <div class="caption">TODO: Make this load.</div>
       </div>
 
       <p>
-        Acknowledgement: Example abstract, image and videos are from <a href="http://idl.cs.washington.edu/projects/lyra">Lyra</a>. <br/><br/>
-        Lyra is an interactive environment that enables custom visualization design without writing any code. Graphical “marks” can be bound to data fields using property drop zones; dynamically positioned using connectors; and directly moved, rotated, and resized using handles. Lyra also provides a data pipeline interface for iterative visual specification of data transformations and layout algorithms. Lyra is more expressive than interactive systems like Tableau, allowing designers to create custom visualizations comparable to hand-coded visualizations built with D3 or Processing. These visualizations can then be easily published and reused on the Web.
+	We have built a system which enables users to view disagregated energy use data for a few different example homes. We provide a system which lets users see their data in real time, lets users quickly glance to see which appliances are on, and lets users compare their energy use to the previous day. There have not been previous visualizations which allow users to see their data in real time, which we believe is critical to helping users cut their power usage.
       </p>
       
       <h2>Software</h2>
       <p>
-        Try it online <a href="http://idl.cs.washington.edu/projects/lyra/app/">here</a>. 
-        (Put detailed running instructions here if you don't have an online version available.  
-        If your software requires some learning before using, you might want to put a short tutorial here.
+	In order to run the our software, you need to install and run our server.
+	<ul>
+	  <li>First check out our github repository <a href="https://github.com/CSE512-14W/fp-eamullen-tanvir-willrs">here</a>.</li>
+	  <li>Next download our example data (not included in the repository due to size) <a href="https://www.dropbox.com/s/nr2p28py6j2pgin/low_freq.tar.bz2">here</a>.</li>
+	  <li>Next, unzip the data and place it in a folder named REPOSITORY/server/data</li>
+	  <li>Next, in the REPOSITORY/server folder, run 'pip install -r requirements.txt'</li>
+	  <li>Finally, in the same folder, run 'python server.py' to start the server.</li>
+	</ul>
+	Now you can access the webpage, at <a href="http://localhost:8080/vis.html">http://localhost:8080/vis.html</a>
       </p>
 
       <h2>Materials</h2>
