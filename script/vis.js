@@ -114,15 +114,31 @@ var toggleDetails = function(state, i) {
       el: document.createElement('div')
     };
     var el = state.details.el;
+    el.addEventListener('click', toggleDetails.bind({}, state, i), false);
     document.body.appendChild(el);
     el.className = 'details';
-    el.innerHTML = 'Details for channel ' + i;
+    
+    var graph = getGraph(state, i);
+    var usage = document.createElement('div');
+    usage.className = 'usage';
+    usage.innerHTML = 'Usage<br />' + Math.round(graph.total / 1000 / 3600 * 100)/100 + ' kWh';
+    el.appendChild(usage);
   } else {
     var el = state.details.el;
     document.body.removeChild(el);
     delete state.details;
   }
 };
+
+var getGraph = function(state, i) {
+  if (i == 1) i = 0;
+  for (var j in state.graphs) {
+    if (state.graphs[j].i == i) {
+      return state.graphs[j];
+    }
+  }
+  return undefined;
+}
 
 var makeGraphs = function(state) {
   var container = document.getElementById('container');

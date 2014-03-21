@@ -92,3 +92,16 @@ img.onLight {
   background: white;
   border-top: 4px solid rgba(255, 255, 255, 0.5);
 }
+
+.details .usage {
+  width: 250px;
+  height:250px;
+  padding-top: 180px;
+  text-align: center;
+  font-size: 1.4em;
+  color: white;
+  font-family: "helvetica";
+  background: url('pics/tag.svg');
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+}
