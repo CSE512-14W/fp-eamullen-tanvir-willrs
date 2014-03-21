@@ -189,15 +189,29 @@ var makeGraphs = function(state) {
 
       if (this.data.length >= 2 && !this.graph) {
         this.el.className = "graph";
+        var series = [];
+        if (this.oldData) {
+          series.push({
+            name: 'Yesterday',
+            renderer: 'line',
+            color: 'gray',
+            data: this.oldData
+          });
+        }
+        if (this.data) {
+          series.push({
+            name: names[this.name],
+            renderer: 'area',
+            color: 'steelblue',
+            data: this.data
+          });
+        }
         this.graph = new Rickshaw.Graph( {
           element: this.el,
           width: 600, 
           height: 200, 
-          series: [{
-            name: names[this.name],
-            color: 'steelblue',
-            data: this.data
-          }],
+          series: series,
+          renderer: 'multi',
           min: 0,
           max: 2100
         });
@@ -206,11 +220,14 @@ var makeGraphs = function(state) {
             graph: this.graph,
             yFormatter: function(y) {
               return y.toFixed(2) + ' W';
-            }
+            },
+            xFormatter: function() {return '';}
         });
 
+        var tt = new Rickshaw.Fixtures.Time.Local();
         var xAxis = new Rickshaw.Graph.Axis.Time({
-            graph: this.graph
+            graph: this.graph,
+            timeFixture: tt
         });
 
         var yAxis = new Rickshaw.Graph.Axis.Y({
@@ -253,6 +270,14 @@ var onMsg = function(state, m) {
       document.getElementById('total').innerText = Math.round(state.graphs[msg.thing].total / 1000 / 3600 * 100)/100 + ' kWh';
     }    
   } else if (msg.req == 'old') {
+    state.graphs[msg.thing].oldData = [];
+    for (var i = 0; i < msg.data.length; i++) {
+      state.graphs[msg.thing].oldData.push({
+        x: Number(msg.data[i][0]) + 60*60*24,
+        y: Number(msg.data[i][1])
+      });
+    }
+  } else { //new
     for (var i = 0; i < msg.data.length; i++) {
       state.graphs[msg.thing].data.push({
         x: Number(msg.data[i][0]),
@@ -261,9 +286,10 @@ var onMsg = function(state, m) {
 
       var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3);
       state.graphs[msg.thing].total += msg.data[i][1] * mul;
-    }
-  } else { //new
-    
+    }    
   }
+  state.graphs[msg.thing].data.sort(function(a,b) {
+    return a.x-b.x;
+  });
   state.graphs[msg.thing].refresh();
 };
