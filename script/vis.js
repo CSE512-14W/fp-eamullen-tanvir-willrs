@@ -138,6 +138,7 @@ var makeGraphs = function(state) {
     var label = makeLabel(state, i);
     container.appendChild(label);
     var graph = {
+      i: i,
       data: [],
       el: el,
       label: label,
@@ -228,6 +229,10 @@ var onMsg = function(state, m) {
 
     var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3);
     state.graphs[msg.thing].total += msg.data[1] * mul;
+
+    if(state.graphs[msg.thing].i == 0) {
+      document.getElementById('total').innerText = Math.round(state.graphs[msg.thing].total / 1000 / 3600 * 100)/100 + ' kWh';
+    }
   }
   state.graphs[msg.thing].refresh();
 };
