@@ -271,20 +271,27 @@ var onMsg = function(state, m) {
     }    
   } else if (msg.req == 'old') {
     state.graphs[msg.thing].oldData = [];
+    var x = Number(msg.data[0][0])
     for (var i = 0; i < msg.data.length; i++) {
+      var nx = Number(msg.data[i][0])
       state.graphs[msg.thing].oldData.push({
-        x: Number(msg.data[i][0]) + 60*60*24,
-        y: Number(msg.data[i][1])
-      });
-    }
-  } else { //new
-    for (var i = 0; i < msg.data.length; i++) {
-      state.graphs[msg.thing].data.push({
-        x: Number(msg.data[i][0]),
+        x: nx + 60*60*24,
         y: Number(msg.data[i][1])
       });
 
-      var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3);
+      var mul = nx - x
+      state.graphs[msg.thing].oldTotal += msg.data[i][1] * mul;
+    }
+  } else { //new
+    var x = Number(msg.data[0][0]);
+    for (var i = 0; i < msg.data.length; i++) {
+      var nx = Number(msg.data[i][0]);
+      state.graphs[msg.thing].data.push({
+        x: nx,
+        y: Number(msg.data[i][1])
+      });
+
+      var mul = nx - x;
       state.graphs[msg.thing].total += msg.data[i][1] * mul;
     }    
   }
