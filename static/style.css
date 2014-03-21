@@ -15,6 +15,17 @@ header {
   position: relative;
 }
 
+#topuse {
+  background: white;
+  color: #999;
+  font-size: .5em;
+  padding: 10px;
+  display:inline-block;
+}
+#headlabel {
+  display:block;
+}
+
 .rickshaw_graph {
   display: inline-block;
   width: 600px;
