@@ -115,7 +115,10 @@ var makeGraphs = function(state) {
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
-            graph: this.graph
+            graph: this.graph,
+            yFormatter: function(y) {
+              return y.toFixed(2) + ' W';
+            }
         });
 
         var xAxis = new Rickshaw.Graph.Axis.Time({
@@ -124,6 +127,9 @@ var makeGraphs = function(state) {
 
         var yAxis = new Rickshaw.Graph.Axis.Y({
           graph: this.graph,
+          tickFormat: function(x) {
+            return x + ' W';
+          }
         });
 
         yAxis.render();
