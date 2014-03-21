@@ -66,7 +66,10 @@ var makeLabel = function(state, i) {
   var img = document.createElement('img');
   img.src = '/static/pics/' + state.channels[i] + '.svg';
   img.style.height = '150px';
+  var text = document.createElement('span');
+  text.innerText = state.channels[i];
   container.appendChild(img);
+  container.appendChild(text);
   
   return container;
 };
@@ -113,7 +116,10 @@ var makeGraphs = function(state) {
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
-            graph: this.graph
+            graph: this.graph,
+            yFormatter: function(y) {
+              return y.toFixed(2) + ' W';
+            }
         });
 
         var xAxis = new Rickshaw.Graph.Axis.Time({
@@ -122,6 +128,9 @@ var makeGraphs = function(state) {
 
         var yAxis = new Rickshaw.Graph.Axis.Y({
           graph: this.graph,
+          tickFormat: function(x) {
+            return x + ' W';
+          }
         });
 
         yAxis.render();
