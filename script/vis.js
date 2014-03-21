@@ -87,7 +87,8 @@ var makeGraphs = function(state) {
     var graph = {
       data: [],
       el: el,
-      name: state.channels[i]
+      name: state.channels[i],
+      total: 0.0
     };
     state.graphs[thing] = graph;
       
@@ -150,12 +151,14 @@ var onMsg = function(state, m) {
         x: Number(msg.data[i][0]),
         y: Number(msg.data[i][1])
       });
+      state.graphs[msg.thing].total += msg.data[i][1];
     }
   } else {
     state.graphs[msg.thing].data.push({
       x: Number(msg.data[0]),
       y: Number(msg.data[1])
     });
+    state.graphs[msg.thing].total += msg.data[1];
   }
   state.graphs[msg.thing].refresh();
 };
