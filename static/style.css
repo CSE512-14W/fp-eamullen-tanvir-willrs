@@ -47,6 +47,10 @@ img.onLight {
   position: absolute;
 }
 
+.label.off img.onLight {
+  display: none;
+}
+
 .hide {
   display: none;
 }
