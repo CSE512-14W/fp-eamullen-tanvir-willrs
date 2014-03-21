@@ -122,7 +122,7 @@ var makeGraphs = function(state) {
             data: this.data
           }],
           min: 0,
-          max: 2000
+          max: 2100
         });
 
         var hoverDetail = new Rickshaw.Graph.HoverDetail({
