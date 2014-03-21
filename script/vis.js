@@ -1,3 +1,25 @@
+var names = {};
+names["mains"] = "Total Power";
+names["oven"] = "Oven";
+names["refrigerator"] = "Refrigerator";
+names["dishwaser"] = "Dishwasher";
+names["kitchen_outlets"] = "Kitchen Appliances";
+names["lighting"] = "Lights";
+names["washer_dryer"] = "Washer and Dryer";
+names["microwave"] = "Microwave";
+names["bathroom_gfi"] = "Hair Dryer";
+names["electric_heat"] = "Electric Heater";
+names["stove"] = "Stove";
+names["disposal"] = "Garbage Disposal";
+names["electronics"] = "Electronics";
+names["furnace"] = "Furnace";
+names["outlets_unknown"] = "Unknown Electronics";
+names["smoke_alarms"] = "Smoke Alarms";
+names["furance"] = "Furnace";
+names["air_conditioning"] = "Air Conditioning";
+names["miscellaeneous"] = "Unknown Electronics";
+names["subpanel"] = "Subpanel";
+
 window.addEventListener('load', function() {
   var state = {
     numHouses: 5,
@@ -68,7 +90,7 @@ var makeLabel = function(state, i) {
   img.src = '/static/pics/' + state.channels[i] + '.svg';
   img.style.height = '150px';
   var text = document.createElement('span');
-  text.innerText = state.channels[i];
+  text.innerText = names[state.channels[i]];
 
   var on = document.createElement('img');
   on.src = "http://www.mediaworks7.com/public/images/bg/green-light.png";
@@ -135,7 +157,7 @@ var makeGraphs = function(state) {
           width: 600, 
           height: 200, 
           series: [{
-            name: this.name,
+            name: names[this.name],
             color: 'steelblue',
             data: this.data
           }],
