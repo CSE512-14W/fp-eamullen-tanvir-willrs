@@ -62,12 +62,12 @@ class DataHandler(tornado.websocket.WebSocketHandler):
         if val['thing'] == 'reset':
           self.on_close()
         else:
-          def onItem(thing, msg):
+          def onItem(thing,req, msg):
             try:
-              self.write_message({'thing': thing, 'data': msg})
+              self.write_message({'thing': thing, 'req': req, 'data': msg})
             except:
               pass
-          DataHandler.data.track(val['thing'], onItem)
+          DataHandler.data.track(val['thing'], val['req'], onItem)
           self.watching.append(onItem)
 
 application = tornado.web.Application([

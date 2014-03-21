@@ -44,8 +44,13 @@ var setupHouseChooser = function(state) {
   document.getElementById('choosehouse').appendChild(chooser);
 };
 
-var start_time = 1303132929
-var curr_time = 1303139250
+var epoch_start = new Date(1303132929 * 1000);
+var first_day = new Date(epoch_start.getFullYear(), epoch_start.getMonth(), epoch_start.getDate() + 1);
+var second_day = new Date(epoch_start.getFullYear(), epoch_start.getMonth(), epoch_start.getDate() + 2);
+var translatedNow = function() {
+  var local = new Date();
+  return new Date(second_day.getFullYear(), second_day.getMonth(), second_day.getDate(), local.getHours(), local.getMinutes(), local.getSeconds(), local.getMilliseconds());
+}
 
 var loadHouse = function(state) {
   if (state.conn) {
@@ -62,7 +67,9 @@ var loadHouse = function(state) {
   state.toSend = [];
   loadChannels(state.house, function(channels) {
     for (var i = 0; i < channels.length; i++) {
-      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '.' + start_time + '.' + curr_time + '"}');
+      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '","req":"stream.' + translatedNow().valueOf() + '"}');
+      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '","req":"day.old.' + first_day.valueOf() + "." + second_day.valueOf() + '"}');
+      state.toSend.push('{"thing": "' + state.house + '.' + (i+1) + '","req":"day.new.' + second_day.valueOf() + "." + translatedNow().valueOf() + '"}');
     }
     if (state.conn.readyState === 1) {
       onMsg(state, {data:"{}"});
@@ -117,12 +124,19 @@ var toggleDetails = function(state, i) {
     el.addEventListener('click', toggleDetails.bind({}, state, i), false);
     document.body.appendChild(el);
     el.className = 'details';
-    
+
     var graph = getGraph(state, i);
+    var kwh = Math.round(graph.total / 1000 / 3600 * 100)/100;
+    var hrs = (translatedNow() - second_day)/1000/60/60;
     var usage = document.createElement('div');
     usage.className = 'usage';
-    usage.innerHTML = 'Usage<br />' + Math.round(graph.total / 1000 / 3600 * 100)/100 + ' kWh';
+    usage.innerHTML = 'Usage<br />' + kwh + ' kWh';
     el.appendChild(usage);
+
+    var cost = document.createElement('div');
+    cost.className = 'cost';
+    cost.innerHTML = 'Estimated Cost<br />' + kwh / hrs * 24*365 * 0.0009 + ' $/Year';
+    el.appendChild(cost);
   } else {
     var el = state.details.el;
     document.body.removeChild(el);
@@ -146,7 +160,7 @@ var makeGraphs = function(state) {
 
   state.graphs = {};
   for (var i = 0; i < state.channels.length; i++) {
-    var thing = state.house + "." + (i + 1) + "." + start_time + "." + curr_time;
+    var thing = state.house + "." + (i + 1);
     var el = document.createElement('div');
     el.className = "graph hide";
     container.appendChild(el);
@@ -216,7 +230,6 @@ var makeGraphs = function(state) {
 var onMsg = function(state, m) {
   while (state.toSend.length) {
     var item = state.toSend.shift();
-    console.warn('subscribing to ' + item);
     state.conn.send(item);
   }
   var msg = JSON.parse(m.data);
@@ -227,17 +240,7 @@ var onMsg = function(state, m) {
     //console.warn('no' + msg.thing);
     return;
   }
-  if (msg.data.length > 2) {
-    for (var i = 0; i < msg.data.length; i++) {
-      state.graphs[msg.thing].data.push({
-        x: Number(msg.data[i][0]),
-        y: Number(msg.data[i][1])
-      });
-
-      var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3);
-      state.graphs[msg.thing].total += msg.data[i][1] * mul;
-    }
-  } else {
+  if (msg.req == 'stream') {
     state.graphs[msg.thing].data.push({
       x: Number(msg.data[0]),
       y: Number(msg.data[1])
@@ -248,7 +251,19 @@ var onMsg = function(state, m) {
 
     if(state.graphs[msg.thing].i == 0) {
       document.getElementById('total').innerText = Math.round(state.graphs[msg.thing].total / 1000 / 3600 * 100)/100 + ' kWh';
+    }    
+  } else if (msg.req == 'old') {
+    for (var i = 0; i < msg.data.length; i++) {
+      state.graphs[msg.thing].data.push({
+        x: Number(msg.data[i][0]),
+        y: Number(msg.data[i][1])
+      });
+
+      var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3);
+      state.graphs[msg.thing].total += msg.data[i][1] * mul;
     }
+  } else { //new
+    
   }
   state.graphs[msg.thing].refresh();
 };

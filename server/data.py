@@ -12,7 +12,7 @@ class Data():
   
   #get current time in data time
   def current_time(self,conn):
-    return time.time() - self.time_diffs[conn]
+    return self.time_diffs[conn] + (time.time() - self.begin_time[conn])
 
   def run(self):
     if not hasattr(self, 'next'):
@@ -44,27 +44,28 @@ class Data():
     for thing in source_copy:
       #TODO: deal with running off end / repeating day
       timestamp = self.current_time(thing) - 1
+      data = -1
       #print "current time is: ", self.current_time(thing)
       while (float(timestamp) < self.current_time(thing)):
         line = self.sources[thing].readline()
         (timestamp,data) = line.split(" ")
-        if (float(timestamp) > self.begin_time[thing]):
-          if is_main_power(thing):
-            if is_chan_1(thing):
-              chan_1[int(timestamp)] = data
-              chan_1_thing = thing
-            else:
-              chan_2[int(timestamp)] = data
-          else:
-            for cb in self.watchers[thing]:
-              self.to_send.append((cb,thing,(timestamp,data)))
+
+      if is_main_power(thing):
+        if is_chan_1(thing):
+          chan_1[int(timestamp)] = data
+          chan_1_thing = thing
+        else:
+          chan_2[int(timestamp)] = data
+      else:
+        for cb in self.watchers[thing]:
+          self.to_send.append((cb,thing,(timestamp,data)))
 
     sent = []
 
     #send single appliance level data
     for x in self.to_send:
       if (float(x[2][0]) < self.current_time(x[1])):
-        x[0](x[1],x[2])
+        x[0](x[1],'stream',x[2])
         sent.append(x)
     
     for x in sent:
@@ -78,7 +79,7 @@ class Data():
     if (chan_1_thing != None):
       for cb in self.watchers[chan_1_thing]:
         for k in chan_1:
-          cb(chan_1_thing,(k,chan_1[k]))
+          cb(chan_1_thing,'stream',(k,chan_1[k]))
 
     #return time until next emit
     return delay
@@ -149,25 +150,26 @@ class Data():
     return []
       
 
-  def track(self, thing, cb):
+  def track(self, thing, req, cb):
     try:
-      (house, channel, begining_of_time, start_time) = thing.split(".")
+      (house, channel) = thing.split(".")
       if (channel == "2"):
         return
       if thing not in self.sources and os.path.exists("data/house_" + house + "/channel_" + channel + ".dat"):
         self.sources[thing] = open("data/house_" + house + "/channel_" + channel + ".dat")
       #keep actual time started and posted time started
       #for each connection
-      self.time_diffs[thing] = time.time() - int(start_time)
-      self.begin_time[thing] = int(start_time)
-      if thing not in self.watchers:
-        self.watchers[thing] = []
-      self.watchers[thing].append(cb)
-      
-      #send summary from begining_of_time to start_time
-      summ = self.summary(int(house),int(channel),int(begining_of_time),int(start_time),300)
-      #print "sending summary: ", summ
-      cb(thing, summ)
+      if req.startswith('stream'):
+        (stream,itsnow) = req.split(".")
+        self.time_diffs[thing] = int(itsnow)/1000
+        self.begin_time[thing] = time.time()
+        if thing not in self.watchers:
+          self.watchers[thing] = []
+        self.watchers[thing].append(cb)
+      else:
+        (day,req,start_time,end_time) = req.split(".")
+        summ = self.summary(int(house), int(channel), int(start_time)/1000, int(end_time)/1000, 300)
+        cb(thing, req, summ)
 
     except:
       e = sys.exc_info()[0]
