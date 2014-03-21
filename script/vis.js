@@ -135,7 +135,7 @@ var toggleDetails = function(state, i) {
 
     var cost = document.createElement('div');
     cost.className = 'cost';
-    cost.innerHTML = 'Estimated Cost<br />' + kwh / hrs * 24*365 * 0.0009 + ' $/Year';
+    cost.innerHTML = 'Estimated Cost<br />' + Math.round(kwh / hrs * 24*365 * 0.0009*100)/100 + ' $/Year';
     el.appendChild(cost);
   } else {
     var el = state.details.el;

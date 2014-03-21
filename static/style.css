@@ -93,15 +93,24 @@ img.onLight {
   border-top: 4px solid rgba(255, 255, 255, 0.5);
 }
 
-.details .usage {
+.details .usage, .details .cost {
   width: 250px;
   height:250px;
   padding-top: 180px;
   text-align: center;
   font-size: 1.4em;
   color: white;
+  display: inline-block;
   font-family: "helvetica";
   background: url('pics/tag.svg');
   background-repeat: no-repeat;
   background-size: 250px 250px;
+}
+
+.details .cost {
+  background: url('pics/money.svg');
+  padding-top: 100px;
+  background-repeat: no-repeat;
+  background-size: 250px 250px;
+  color: black;
 }
