@@ -114,7 +114,7 @@ var toggleDetails = function(state, i) {
   if (!state.details || state.details.i != i) {
     if (state.details) {
       var el = state.details.el;
-      document.body.removeChild(el);
+      el.parentNode.removeChild(el);
     }
     state.details = {
       i : i,
@@ -122,24 +122,30 @@ var toggleDetails = function(state, i) {
     };
     var el = state.details.el;
     el.addEventListener('click', toggleDetails.bind({}, state, i), false);
-    document.body.appendChild(el);
     el.className = 'details';
 
     var graph = getGraph(state, i);
+    graph.el.appendChild(el);
     var kwh = Math.round(graph.total / 1000 / 3600 * 100)/100;
     var hrs = (translatedNow() - second_day)/1000/60/60;
     var usage = document.createElement('div');
     usage.className = 'usage';
-    usage.innerHTML = 'Usage<br />' + kwh + ' kWh';
+    usage.innerHTML = 'Usage<br />Today<br />' + kwh + ' kWh';
     el.appendChild(usage);
 
     var cost = document.createElement('div');
     cost.className = 'cost';
-    cost.innerHTML = 'Estimated Cost<br />' + Math.round(kwh / hrs * 24*365 * 0.0009*100)/100 + ' $/Year';
+    var okwh = graph.oldTotal;
+    cost.innerHTML = 'Estimated Cost<br />' + Math.round(okwh *365 * 0.0009*100)/100 + '$/Year';
     el.appendChild(cost);
+
+    var cd = document.createElement('div');
+    cd.className = 'cd';
+    cd.innerHTML = 'Cost Today<br />' + Math.round(kwh * 0.0009*100)/100 + '$';
+    el.appendChild(cd);
   } else {
     var el = state.details.el;
-    document.body.removeChild(el);
+    el.parentNode.removeChild(el);
     delete state.details;
   }
 };
@@ -271,16 +277,18 @@ var onMsg = function(state, m) {
     }    
   } else if (msg.req == 'old') {
     state.graphs[msg.thing].oldData = [];
+    state.graphs[msg.thing].oldTotal = 0;
     var x = Number(msg.data[0][0])
-    for (var i = 0; i < msg.data.length; i++) {
+      for (var i = 0; i < msg.data.length; i++) {
       var nx = Number(msg.data[i][0])
       state.graphs[msg.thing].oldData.push({
         x: nx + 60*60*24,
         y: Number(msg.data[i][1])
       });
 
-      var mul = nx - x
-      state.graphs[msg.thing].oldTotal += msg.data[i][1] * mul;
+      var mul = (nx - x)/3600/1000 * Number(msg.data[i][1])
+      if (mul != NaN)
+        state.graphs[msg.thing].oldTotal += mul;
     }
   } else { //new
     var x = Number(msg.data[0][0]);
