@@ -63,7 +63,7 @@ class Data():
 
     #send single appliance level data
     for x in self.to_send:
-      if (float(x[2][0]) < self.current_time(thing)):
+      if (float(x[2][0]) < self.current_time(x[1])):
         x[0](x[1],x[2])
         sent.append(x)
     

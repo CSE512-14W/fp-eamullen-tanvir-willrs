@@ -24,7 +24,7 @@ header {
   margin-top: -200px;
   position: absolute;
   display: inline-block;
-  right: 0;
+  right: -60px;
 }
 
 .label img {
@@ -44,6 +44,7 @@ header {
 .hide {
   display: none;
 }
+
 .label:hover span {
   display:block;
 }

@@ -68,8 +68,18 @@ var makeLabel = function(state, i) {
   img.style.height = '150px';
   var text = document.createElement('span');
   text.innerText = state.channels[i];
+
+  var on = document.createElement('img');
+  on.src = "http://www.mediaworks7.com/public/images/bg/green-light.png"
+  on.style.height = '20px';
+  on.style.width = '20px';
+  on.style.position = 'relative';
+  on.style.top = '-150px';
+
   container.appendChild(img);
   container.appendChild(text);
+  container.appendChild(on);
+
   
   return container;
 };
@@ -160,14 +170,16 @@ var onMsg = function(state, m) {
         x: Number(msg.data[i][0]),
         y: Number(msg.data[i][1])
       });
-      state.graphs[msg.thing].total += msg.data[i][1];
+      var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3)
+      state.graphs[msg.thing].total += msg.data[i][1] * mul;
     }
   } else {
     state.graphs[msg.thing].data.push({
       x: Number(msg.data[0]),
       y: Number(msg.data[1])
     });
-    state.graphs[msg.thing].total += msg.data[1];
+    var mul = (parseInt(msg.thing.split(".")[1]) < 2 ? 1 : 3)
+    state.graphs[msg.thing].total += msg.data[1] * mul;
   }
   state.graphs[msg.thing].refresh();
 };
