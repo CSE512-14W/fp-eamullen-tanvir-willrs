@@ -1,25 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Home Energy Usage</title>
-    <script type="text/javascript" src="lib/d3.v3.js"></script>
-    <script type="text/javascript" src="lib/rickshaw.js"></script>
-    <script type="text/javascript" src="script/vis.js"></script>
-    <link rel="stylesheet" type="text/css" href="static/style.css" />
-    <link rel="stylesheet" type="text/css" href="static/rickshaw.css" />
-  </head>
-  <body>
-    <header>
-      <span id='choosehouse'></span>
-      Home Appliance Energy Usage
-      <div id='topuse'>
-        <span id='headlabel'>Usage Today</span>
-        <span id='total'></span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>CSE512: Data Visualization</title>
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" type="text/css" href="http://courses.cs.washington.edu/courses/cse512/14wi/style.css"/>
+
+</head>
+
+<body>
+  <div class='content wider'>
+
+    <div class='title'>
+      <a href="http://courses.cs.washington.edu/courses/cse512/14wi/"><strong>CSE512</strong></a>
+         Projects
+         <small>(Winter 2014)</small>
+    </div>
+    <br/>
+
+    <div class='pub' data-spy="scroll" data-target=".navbar">
+
+      <h1 class="title">Disaggregated Energy Use Visualization</h1>
+      <div class="authors">
+	Md Tanvir Islam Aumi, Eric Mullen, Will Scott
       </div>
-    </header>
-    <section id='container'>
-      <div id='chart'></div>
-    </section>
-  </body>
+
+      <div class="figure">
+        <img src="http://localhost:8080/screenshots/main_site.png" width="100%"/>
+        <div class="caption">TODO: Make this load.</div>
+      </div>
+
+      <p>
+	We have built a system which enables users to view disagregated energy use data for a few different example homes. We provide a system which lets users see their data in real time, lets users quickly glance to see which appliances are on, and lets users compare their energy use to the previous day. There have not been previous visualizations which allow users to see their data in real time, which we believe is critical to helping users cut their power usage.
+      </p>
+      
+      <h2>Software</h2>
+      <p>
+	In order to run the our software, you need to install and run our server.
+	<ul>
+	  <li>First check out our github repository <a href="https://github.com/CSE512-14W/fp-eamullen-tanvir-willrs">here</a>.</li>
+	  <li>Next download our example data (not included in the repository due to size) <a href="https://www.dropbox.com/s/nr2p28py6j2pgin/low_freq.tar.bz2">here</a>.</li>
+	  <li>Next, unzip the data and place it in a folder named REPOSITORY/server/data</li>
+	  <li>Next, in the REPOSITORY/server folder, run 'pip install -r requirements.txt'</li>
+	  <li>Finally, in the same folder, run 'python server.py' to start the server.</li>
+	</ul>
+	Now you can access the webpage, at <a href="http://localhost:8080/vis.html">http://localhost:8080/vis.html</a>
+      </p>
+
+      <h2>Materials</h2>
+      <div class="links">
+        <a href="final/paper-jheer-kanitw.pdf" >PDF</a>
+        |
+        <a href="final/poster-jheer-kanitw.pdf" >Poster</a>
+      </div>
+
+      <h2>Videos</h2>
+      <video width="700" height="385" controls="">
+        <source src="http://idl.cs.washington.edu/static/images/projects/lyra/Playfair-New.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+
+      <div class='footer'>
+        <a href='http://cs.washington.edu'>Computer Science &amp; Engineering</a> -
+        <a href='http://www.washington.edu'>University of Washington</a>
+      </div>
+    </div>
+    <br/>
+    <br/>
+
+
+  </div>
+</body>
+
 </html>

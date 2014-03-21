@@ -26,14 +26,14 @@ rootLogger.setLevel(logging.ERROR)
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
-        self.render("../index.html")
+        self.render("../vis.html")
 
 class LabelHandler(tornado.web.RequestHandler):
     def get(self, thing):
       try:
         self.render("data/house_" + str(int(thing)) + "/labels.dat")
       except:
-        self.render("../index.html")
+        self.render("../vis.html")
 
 class DataHandler(tornado.websocket.WebSocketHandler):
     data = Data()
@@ -72,6 +72,7 @@ class DataHandler(tornado.websocket.WebSocketHandler):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
+    (r"/vis.html", MainHandler),
     (r"/lib/(.*)", tornado.web.StaticFileHandler, {'path': '../lib/'}),
     (r"/script/(.*)", tornado.web.StaticFileHandler, {'path': '../script'}),
     (r"/static/(.*)", tornado.web.StaticFileHandler, {'path': '../static'}),
